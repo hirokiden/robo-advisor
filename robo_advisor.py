@@ -22,10 +22,17 @@ python robo_advisor.py
 
 # To issue an http request in python, you must import a 'request package'
 
+import os
 import requests
 import json # need this to import json string into dictionary
-from datetime import datetime #Taken from stackoverflow
+from datetime import datetime # taken from stackoverflow
+import csv # so you can write date to .csv
 
+# Current Time for transaction pull
+
+
+date_time = datetime.now().strftime("%m/%d/%Y, %I:%M:%S%P\n")
+# print(date_time)
 
 # Also, we know that we are working with $ pricing so let's get the formatting out of the way
 
@@ -81,6 +88,19 @@ most_recent_total_volumes_traded = parsed_response["Time Series (Daily)"][curren
 
 
 
+csv_file_path = os.path.join(os.path.dirname(__file__), "data", "prices.csv") # a relative filepath
+#prior examples had ".." --> this means go above one directory.  since app file is not in a separate folder, no need for ".."
+
+
+
+with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
+    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
+    writer.writeheader() # uses fieldnames set above
+    writer.writerow({"city": "New York", "name": "Yankees"})
+    writer.writerow({"city": "New York", "name": "Mets"})
+    writer.writerow({"city": "Boston", "name": "Red Sox"})
+    writer.writerow({"city": "New Haven", "name": "Ravens"})
+
 
 
 # 
@@ -93,16 +113,19 @@ print("-------------------------")
 print(f"SELECTED SYMBOL: {traded_stock_ticker}")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print("REQUEST AT:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+print("REQUEST AT:", date_time)
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {usd_format(float(most_recent_close))}") # a float() is necessary to convert a string to a float, otherwise error
 print(f"RECENT HIGH: {usd_format(float(most_recent_high))}")
 print(f"RECENT LOW: {usd_format(float(most_recent_low))}")
-print(f"VOLUMES TRADED: {int(most_recent_total_volumes_traded)}")
+print(f"VOLUMES TRADED: {int(most_recent_total_volumes_traded)}") #switch this portion to int() since no such thing as fraction of share...
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
+print("DATA STORED TO .CSV FILE")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
+
+
