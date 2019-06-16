@@ -80,7 +80,7 @@ most_recent_total_volumes_traded = parsed_response["Time Series (Daily)"][curren
     # c) most_recent_low
 
 
-
+# Recommendation will entail % change from high and whether it exceeds a certain % amount.  Use conditional if then statement
 
 
 
@@ -94,12 +94,24 @@ csv_file_path = os.path.join(os.path.dirname(__file__), "data", "prices.csv") # 
 
 
 with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
-    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
+    
+    csv_headers = ["TimeStamp", "Open", "High", "Low", "Close", "Volume"]
+    writer = csv.DictWriter(csv_file, fieldnames = csv_headers)
     writer.writeheader() # uses fieldnames set above
-    writer.writerow({"city": "New York", "name": "Yankees"})
-    writer.writerow({"city": "New York", "name": "Mets"})
-    writer.writerow({"city": "Boston", "name": "Red Sox"})
-    writer.writerow({"city": "New Haven", "name": "Ravens"})
+   
+    for date in dates_list:
+        daily_performance = parsed_response["Time Series (Daily)"][date]
+
+        writer.writerow({
+        "TimeStamp": date, 
+        "Open": daily_performance["1. open"], 
+        "High": daily_performance["2. high"], 
+        "Low": daily_performance["3. low"], 
+        "Close": daily_performance["4. close"], 
+        "Volume": daily_performance["5. volume"] 
+        
+        })
+
 
 
 
