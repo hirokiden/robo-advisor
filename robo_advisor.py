@@ -20,7 +20,7 @@ python robo_advisor.py
 
 
 
-# To issue an http request in python, you can import a 'request package'
+# To issue an http request in python, you must import a 'request package'
 
 import requests
 import json # need this to import json string into dictionary
@@ -35,7 +35,19 @@ response = requests.get(request_url)
 
 parsed_response = json.loads(response.text) #this converts string format into dictionary
 
-breakpoint()
+last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+
+# To find out what the keys are in dictionary format, remember to use command ' parsed_response.keys() '
+# Now let's dig a bit deeper, use format ' parsed_response["Meta Data"] ' to find the contents within this key, a.k.a. nested data
+# Further inspection of nested data you can use ' parsed_response["Meta Data"]["3. Last Refreshed"] ' --> Last refreshed portion
+
+
+
+# breakpoint()
+
+
+
+
 
 # 
 #  INFO OUTPUTS
@@ -49,7 +61,7 @@ print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
 print("REQUEST AT: 2018-02-20 02:00pm")
 print("-------------------------")
-print("LATEST DAY: 2018-02-20")
+print(f"LATEST DAY: {last_refreshed}")
 print("LATEST CLOSE: $100,000.00")
 print("RECENT HIGH: $101,000.00")
 print("RECENT LOW: $99,000.00")
