@@ -41,8 +41,14 @@ response = requests.get(request_url)
 
 parsed_response = json.loads(response.text) #this converts string format into dictionary
 
+dates_list = list(parsed_response["Time Series (Daily)"].keys()) # convert the dates dictionary keys into list format
+
+current_date = dates_list[0] # son loads will alphavantage's most recent values that is already sorted, but might need to sort just in case later
+
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
-most_recent_close = parsed_response["Time Series (Daily)"]["2019-06-14"]["4. close"]
+most_recent_close = parsed_response["Time Series (Daily)"][current_date]["4. close"]
+
+
 
 
 # To find out what the keys are in dictionary format, remember to use command ' parsed_response.keys() '
@@ -51,7 +57,11 @@ most_recent_close = parsed_response["Time Series (Daily)"]["2019-06-14"]["4. clo
 # Now let's try finding the most recent close.  To access this, you need to access the nested dictionary.
 # Enter parsed_response into the terminal to expand dict.keys(), which you find that nested structure or refer to 
 # https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo
-# to find the structure.  You find that the format is ' parsed_response["Time Series (Daily)"]["2019-06-14"]["4. close"] '
+# to find the structure.  You find that the format is ' parsed_response["Time Series (Daily)"][current_date]["4. close"] '
+# However, realize the '["2019-06-14"]' is anchored and will be irrelevant tomorrow! so replace that as variable
+# Set a variable to dynamic function  
+# ' parsed_response["Time Series (Daily)"].keys() ' to find the dictionary keys of 'Time series Daily'
+# Conver the Time series Daily' dictinoary keys into a list so we can do as simply do current_date[0] to pull the first date
 
 
 
