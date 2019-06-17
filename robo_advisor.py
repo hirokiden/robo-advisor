@@ -79,7 +79,7 @@ parsed_response = json.loads(response.text) #this converts string format into di
 dates_list = list(parsed_response["Time Series (Daily)"].keys()) # convert the dates dictionary keys into list format
 
 
-current_date = dates_list[0] # son loads will alphavantage's most recent values that is already sorted, but might need to sort just in case later
+current_date = dates_list[0] # json loads will alphavantage's most recent values that is already sorted, but might need to sort just in case later
 
 traded_stock_ticker = parsed_response["Meta Data"]["2. Symbol"]
 
