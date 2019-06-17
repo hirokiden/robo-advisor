@@ -28,9 +28,26 @@ import json # need this to import json string into dictionary
 from datetime import datetime # taken from stackoverflow
 import csv # so you can write date to .csv
 
+##### THIS SECTION HERE ENABLES + ALLOWS YOU TO USE .ENV FILES WHERE API KEY IS STORED ################################################
+
+# Derived from course repository and robo-advisor video guide
+
+from dotenv import load_dotenv 
+import requests
+
+load_dotenv() #> loads contents of the .env file into the script's environment
+
+api_key = os.environ.get("ALPHAVANTAGE_API_KEY") # default to using the "demo" key if an Env Var is not supplied
+#  However, the "ALPHAVANTAGE_API_KEY" will refer to the api key that you have generated and stored on the .env file
+
+
+# print(api_key) --> don't include this as the api key is secret, but it worked ! *thumbs up!*
+
+#######################################################################################################################################
+
+
+
 # Current Time for transaction pull
-
-
 date_time = datetime.now().strftime("%m/%d/%Y, %I:%M:%S%P\n")
 # print(date_time)
 
@@ -39,7 +56,17 @@ date_time = datetime.now().strftime("%m/%d/%Y, %I:%M:%S%P\n")
 def usd_format(my_price):
     return "${0:,.2f}".format(my_price) # This UDF will change numerical denomination to currency and cents format when passed through
 
-request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo"
+
+# api_key = "demo" --> no longer in use, API_KEY
+
+
+print("Please enter a valid stock ticker symbol!  As an example, Disney is 'DIS' and AT&T is 'T'. ")
+user_input_ticker = input()
+
+# testuser_input_ticker = input()
+
+
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={user_input_ticker}&apikey={api_key}"
 
 response = requests.get(request_url)
 
