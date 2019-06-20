@@ -84,6 +84,7 @@ current_date = dates_list[0] # json loads will alphavantage's most recent values
 traded_stock_ticker = parsed_response["Meta Data"]["2. Symbol"]
 
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+most_recent_open = parsed_response["Time Series (Daily)"][current_date]["1. open"]
 most_recent_close = parsed_response["Time Series (Daily)"][current_date]["4. close"]
 most_recent_high = parsed_response["Time Series (Daily)"][current_date]["2. high"]
 most_recent_low = parsed_response["Time Series (Daily)"][current_date]["3. low"]
@@ -107,7 +108,9 @@ most_recent_total_volumes_traded = parsed_response["Time Series (Daily)"][curren
     # c) most_recent_low
 
 
-# Recommendation will entail % change from high and whether it exceeds a certain % amount.  Use conditional if then statement
+
+
+
 
 
 
@@ -146,7 +149,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
 #  INFO OUTPUTS
 # 
 
-
+percentage_change_close_vs_open = ((float(most_recent_close)/float(most_recent_open) - 1) * 100)
 
 print("-------------------------")
 print(f"SELECTED SYMBOL: {traded_stock_ticker}")
@@ -155,13 +158,40 @@ print("REQUESTING STOCK MARKET DATA...")
 print("REQUEST AT:", date_time)
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
+print(f"LATEST OPEN: {usd_format(float(most_recent_open))}")
 print(f"LATEST CLOSE: {usd_format(float(most_recent_close))}") # a float() is necessary to convert a string to a float, otherwise error
+print("% CHANGE FROM OPEN TO CLOSE", "{0:.2%}".format(percentage_change_close_vs_open, "%"))
 print(f"RECENT HIGH: {usd_format(float(most_recent_high))}")
 print(f"RECENT LOW: {usd_format(float(most_recent_low))}")
 print(f"VOLUMES TRADED: {int(most_recent_total_volumes_traded)}") #switch this portion to int() since no such thing as fraction of share...
 print("-------------------------")
-print("RECOMMENDATION: BUY!")
-print("RECOMMENDATION REASON: TODO")
+
+# Recommendation will entail % change from high and whether it exceeds a certain % amount.  Use conditional if then statement
+# I opted to create three different subsection
+
+recommendation_sell = "Sell, so you won't lose your shirt...  This stock went down by more than -8%..."
+
+recommendation_buy = "Buy, this stock is potentially a great opportunity...  This stock went up by more than 3%..."
+
+recommendation_hold = "Hold, don't do anything...  This stock is operating with no abrupt changes in price..."
+
+
+
+
+
+if percentage_change_close_vs_open < float(-8):
+    print("RECOMMENDATION:", recommendation_sell)
+
+elif percentage_change_close_vs_open > float(3):
+    print("RECOMMENDATION:", recommendation_buy)
+
+elif percentage_change_close_vs_open > float(-3) and percentage_change_close_vs_open < float(3):
+    print("RECOMMENDATION:", recommendation_hold)
+
+
+
+# print("RECOMMENDATION: BUY!")
+# print("RECOMMENDATION REASON: TODO")
 print("DATA STORED TO .CSV FILE")
 print("-------------------------")
 print("HAPPY INVESTING!")
