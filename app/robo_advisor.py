@@ -124,6 +124,7 @@ most_recent_low = parsed_response["Time Series (Daily)"][current_date]["3. low"]
 most_recent_total_volumes_traded = parsed_response["Time Series (Daily)"][current_date]["5. volume"]
 
 
+
 # To find out what the keys are in dictionary format, remember to use syntax' parsed_response.keys() '
 # Now let's dig a bit deeper, use format ' parsed_response["Meta Data"] ' to find the contents within this key, a.k.a. nested data
 # Further inspection of nested data you can use ' parsed_response["Meta Data"]["3. Last Refreshed"] ' --> Last refreshed portion
@@ -192,7 +193,7 @@ print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
 print("REQUEST AT:", date_time)
 print("-------------------------")
-print(f"LATEST DAY: {last_refreshed}")
+print(f"LATEST DATA FROM: {last_refreshed}")
 print(f"LATEST OPEN: {usd_format(float(most_recent_open))}")
 print(f"LATEST CLOSE: {usd_format(float(most_recent_close))}") # a float() is necessary to convert a string to a float, otherwise error
 print("% CHANGE FROM OPEN TO CLOSE", "{0:.3%}".format(percentage_change_close_vs_open)) # % replaces f and included 3 digits for precision
