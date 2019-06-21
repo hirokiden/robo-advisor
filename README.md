@@ -3,7 +3,7 @@
 ###########################################################################################################################################
 1) Getting the basics set up
 
-a) Please run your terminal, select the file, right click/contol + click and select 'new terminal at folder', or you can use terminal pathing via:  cd ~/documents/github/app/robo-advisor (note that this is dependent on where you stored your file)
+a) Please run your terminal, select the file, right click/control + click and select 'new terminal at folder', or you can use terminal pathing via:  cd ~/documents/github/app/robo-advisor (note that this is dependent on where you stored your file)
 
 In order to run this robo-advisor script, several packages need to be installed:
 
@@ -88,7 +88,7 @@ def usd_format(my_price):
 ###########################################################################################################################################
 6) Setting up Validation Step 1 and setting up the user input
 
-a) Inputting a stock ticker is driven through correct user inputs, but there needs to be a simple fail safe loop that prevents script from proceeding without an approved input.  This can be completed via using a 'while' loop and setting up a series of conditional statements so:
+a) Inputting a stock ticker is driven through correct user inputs, but there needs to be a simple fail-safe loop that prevents script from proceeding without an approved input.  This can be completed via using a 'while' loop and setting up a series of conditional statements so:
 
 x) tickers that are numbers are invalid (prevents errors such as '88888')
 y) tickers that exceed five characters are also invalid (prevents excessive inputs such as 'ABCDEFG')
@@ -110,7 +110,7 @@ while True:
 ###########################################################################################################################################
 6) Importing data from JSON and creating a Validation Step 2
 
-a) Now that all the packages are imported, the next step is to pull JSON data using a request url and replacing the example url below with the subsequent url.  Then store the requested data 'requests.get()' to 'response' variable.  With this, you can now use the 'json.loads()' syntax to load the 'response' variable that will convert the string fromat into the proper dictionary format. Store that result under a new variable, which in this case is 'parsed_response'
+a) Now that all the packages are imported, the next step is to pull JSON data using a request url and replacing the example url below with the subsequent url.  Then store the requested data 'requests.get()' to 'response' variable.  With this, you can now use the 'json.loads()' syntax to load the 'response' variable that will convert the string format into the proper dictionary format. Store that result under a new variable, which in this case is 'parsed_response'
 
 
 Example URL FORMAT:
@@ -128,7 +128,7 @@ parsed_response = json.loads(response.text) #this converts string format into di
 ###########################################################################################################################################
 7) Creating a Validation Step 2
 
-a) To prevent an awkward error from poor html connectivity via incorrect/invalid input, we also need to design a fail safe to gracefully end the script.  This can be achieved via a simply try:, except: clause.  If there is a failure in the JSON Pull, then the script will exit() to prevent error
+a) To prevent an awkward error from poor html connectivity via incorrect/invalid input, we also need to design a fail-safe to gracefully end the script.  This can be achieved via a simply try:, except: clause.  If there is a failure in the JSON Pull, then the script will exit() to prevent error
 
 
 try: 
@@ -146,7 +146,7 @@ a) Now that JSON components have been imported from the Alphavantage site using 
 
 The following code completes this process:
 
-a) The dictionary keys from "Time Series (Daily)" is convereted to list format
+a) The dictionary keys from "Time Series (Daily)" is converted to list format
 
 
 dates_list = list(parsed_response["Time Series (Daily)"].keys()) # convert the dates dictionary keys into list format
@@ -212,7 +212,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
 ###########################################################################################################################################
 10) Printing the Desired Results
 
-a) We're almost there!  We can now print out the variables that we have selected from the dictionary earlier on.  Ensure that you pass the float(variables) through the previouly defined currency formatter UDF from section 5 (in this case {usd_format(float(variable))} ).  With this, you should be able to print out all the desired variables in correct format.
+a) We're almost there!  We can now print out the variables that we have selected from the dictionary earlier on.  Ensure that you pass the float(variables) through the previously defined currency formatter UDF from section 5 (in this case {usd_format(float(variable))} ).  With this, you should be able to print out all the desired variables in correct format.
 
 I've also included a sample % change formula to a variable to document the % change calculations between opening and closing stock prices:
 
