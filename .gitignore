@@ -102,3 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# .gitignore
+
+# ignore secret environment variable values in the ".env" file:
+.env
