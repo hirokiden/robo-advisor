@@ -115,7 +115,7 @@ while True:
 
 #################################
 
-6) Importing data from JSON and creating a Validation Step 2
+7) Importing data from JSON and creating a Validation Step 2
 
 a) Now that all the packages are imported, the next step is to pull JSON data using a request url and replacing the example url below with the subsequent url.  Then store the requested data 'requests.get()' to 'response' variable.  With this, you can now use the 'json.loads()' syntax to load the 'response' variable that will convert the string format into the proper dictionary format. Store that result under a new variable, which in this case is 'parsed_response'
 
@@ -134,7 +134,7 @@ parsed_response = json.loads(response.text) #this converts string format into di
 
 #################################
 
-7) Creating a Validation Step 2
+8) Creating a Validation Step 2
 
 a) To prevent an awkward error from poor html connectivity via incorrect/invalid input, we also need to design a fail-safe to gracefully end the script.  This can be achieved via a simply try:, except: clause.  If there is a failure in the JSON Pull, then the script will exit() to prevent error
 
@@ -148,7 +148,7 @@ except:
 
 #################################
 
-8) JSON Dictionary to Desired Output
+9) JSON Dictionary to Desired Output
 
 a) Now that JSON components have been imported from the Alphavantage site using API Key and user input, we have to pull relevant data from the dictionary that a user generates (Can be any stock ticker)
 
@@ -182,7 +182,7 @@ most_recent_total_volumes_traded = parsed_response["Time Series (Daily)"][curren
 
 #################################
 
-9) Outputting Historical Stock Details onto a CSV File
+10) Outputting Historical Stock Details onto a CSV File
 
 We can write a .csv file with trading/stock data when we operate the script by preparing the following:
 
@@ -221,7 +221,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
 
 #################################
 
-10) Printing the Desired Results
+11) Printing the Desired Results
 
 a) We're almost there!  We can now print out the variables that we have selected from the dictionary earlier on.  Ensure that you pass the float(variables) through the previously defined currency formatter UDF from section 5 (in this case {usd_format(float(variable))} ).  With this, you should be able to print out all the desired variables in correct format.
 
@@ -248,7 +248,7 @@ print("-------------------------")
 
 #################################
 
-11) Printing Your Personal Recommendations
+12) Printing Your Personal Recommendations
 
 a) You can incorporate whatever conditional recommendations you see fit, but I created some variables and my personal risk tolerance levels for % change + recommended moves:
 
@@ -280,7 +280,7 @@ print("-------------------------")
 
 #################################
 
-12) Final Statement
+13) Final Statement
 
 Hope this was a fun project!  With this set up we should have:
 
