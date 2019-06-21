@@ -1,6 +1,7 @@
 # robo-advisor Walkthrough README.md
 
 #################################
+
 1) Getting the basics set up
 
 a) Please run your terminal, select the file, right click/control + click and select 'new terminal at folder', or you can use terminal pathing via:  cd ~/documents/github/app/robo-advisor (note that this is dependent on where you stored your file)
@@ -22,6 +23,7 @@ python robo_advisor.py
 
 
 #################################
+
 2) Ensuring that you import the correct packages
 
 a) To ensure that the script runs correctly, please import the following:
@@ -38,6 +40,7 @@ b) To briefly explain, os is needed for file pathing, requests and json is neces
 
 
 #################################
+
 3) Setting up an .env file and making sure its content will be loaded into script's environment
 
 a) Security is vital so we don't want to have your private API Key show up on your public github repository.  Hence, the the .gitignore component will prevent .env file to show up in the github repository.  Nonetheless, the .env file contents will have to be loaded into the script's environment via the following:
@@ -50,6 +53,7 @@ load_dotenv()
 
 
 #################################
+
 4) Gather an API Key from Alphavantage and store it in your .env file
 
 a) In order to pull dynamic, real time stock and financial data, you need to go to https://www.alphavantage.co/support/#api-key to generate your personal API Key.  
@@ -68,6 +72,7 @@ c) By doing this, you can securely store your private key without worries of oth
 
 
 #################################
+
 5) Set up your date and currency formatting to ensure less pain later
 
 a) Since we know that stocks are reliant on date and $xx.xx formatting, we should set formatting up to avoid confusion later
@@ -86,6 +91,7 @@ def usd_format(my_price):
 
 
 #################################
+
 6) Setting up Validation Step 1 and setting up the user input
 
 a) Inputting a stock ticker is driven through correct user inputs, but there needs to be a simple fail-safe loop that prevents script from proceeding without an approved input.  This can be completed via using a 'while' loop and setting up a series of conditional statements so:
@@ -107,7 +113,8 @@ while True:
         break
 
 
-###########################################################################################################################################
+#################################
+
 6) Importing data from JSON and creating a Validation Step 2
 
 a) Now that all the packages are imported, the next step is to pull JSON data using a request url and replacing the example url below with the subsequent url.  Then store the requested data 'requests.get()' to 'response' variable.  With this, you can now use the 'json.loads()' syntax to load the 'response' variable that will convert the string format into the proper dictionary format. Store that result under a new variable, which in this case is 'parsed_response'
@@ -126,6 +133,7 @@ parsed_response = json.loads(response.text) #this converts string format into di
 
 
 #################################
+
 7) Creating a Validation Step 2
 
 a) To prevent an awkward error from poor html connectivity via incorrect/invalid input, we also need to design a fail-safe to gracefully end the script.  This can be achieved via a simply try:, except: clause.  If there is a failure in the JSON Pull, then the script will exit() to prevent error
@@ -139,6 +147,7 @@ except:
 
 
 #################################
+
 8) JSON Dictionary to Desired Output
 
 a) Now that JSON components have been imported from the Alphavantage site using API Key and user input, we have to pull relevant data from the dictionary that a user generates (Can be any stock ticker)
@@ -172,6 +181,7 @@ most_recent_total_volumes_traded = parsed_response["Time Series (Daily)"][curren
 
 
 #################################
+
 9) Outputting Historical Stock Details onto a CSV File
 
 We can write a .csv file with trading/stock data when we operate the script by preparing the following:
@@ -210,6 +220,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
 
 
 #################################
+
 10) Printing the Desired Results
 
 a) We're almost there!  We can now print out the variables that we have selected from the dictionary earlier on.  Ensure that you pass the float(variables) through the previously defined currency formatter UDF from section 5 (in this case {usd_format(float(variable))} ).  With this, you should be able to print out all the desired variables in correct format.
@@ -236,6 +247,7 @@ print("-------------------------")
 
 
 #################################
+
 11) Printing Your Personal Recommendations
 
 a) You can incorporate whatever conditional recommendations you see fit, but I created some variables and my personal risk tolerance levels for % change + recommended moves:
@@ -267,7 +279,8 @@ print("-------------------------")
 
 
 #################################
-11) Final Statement
+
+12) Final Statement
 
 Hope this was a fun project!  With this set up we should have:
 
