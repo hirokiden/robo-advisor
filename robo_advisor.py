@@ -61,9 +61,19 @@ def usd_format(my_price):
 
 
 print("Please enter a valid stock ticker symbol!  As an example, Disney is 'DIS' and AT&T is 'T'. ")
-user_input_ticker = input()
 
-# testuser_input_ticker = input()
+while True:
+    user_input_ticker = input()
+    # testuser_input_ticker = input()
+
+    if user_input_ticker.isdigit() == True: # Attributed this line of code concept to classmate Harrison Grubb's advice, 
+        # more details located from https://www.tutorialspoint.com/python/string_isdigit.htm, script concept borrowed from website after research
+        print("Ticker cannot be a number, please try again")
+    elif len(user_input_ticker) > 5:
+        print("Ticker cannot exceed 5 characters, please try again")
+    else:
+        break
+
 
 
 request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={user_input_ticker}&apikey={api_key}"
@@ -74,7 +84,16 @@ response = requests.get(request_url)
 # print(response.status_code)
 # print(response.text) # This is a string
 
+
 parsed_response = json.loads(response.text) #this converts string format into dictionary
+
+# JSON anti-corrupter script
+
+try:
+    parsed_response["Meta Data"]
+except:
+    print("Invalid ticker, please rerun the script")
+    exit()
 
 dates_list = list(parsed_response["Time Series (Daily)"].keys()) # convert the dates dictionary keys into list format
 
