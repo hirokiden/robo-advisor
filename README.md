@@ -296,17 +296,3 @@ x h) Easy to process repository that shows incremental revision history
 
 
 
-
-
-Actual Project Requirements:
-
-xRepository	Includes README.md file with detailed instructions	7.5%
-xSecurity	Excludes secret API Key values from the source code	12.5%
-xValidations (Prelim)	Prevents an HTTP request if stock symbol not likely to be valid (e.g. symbol of "8888")	5%
-xValidations	Fails gracefully if encountering a response error (e.g. symbol of "OOPS")	7.5%
-xCalculations	Displays accurate information	15%
-xInfo Outputs	Displays final recommendation, including justification / context	17.5%
-xInfo Outputs	Writes historical prices to CSV file	10%
-xInfo Outputs	Formats all prices as USD (doesn't apply to CSV file values)	5%
-xDev Process	Submitted via remote Git repository which reflects an incremental revision history	20%
-
