@@ -1,6 +1,6 @@
 # robo-advisor Walkthrough README.md
 
-###########################################################################################################################################
+#################################
 1) Getting the basics set up
 
 a) Please run your terminal, select the file, right click/control + click and select 'new terminal at folder', or you can use terminal pathing via:  cd ~/documents/github/app/robo-advisor (note that this is dependent on where you stored your file)
@@ -21,7 +21,7 @@ b) The command line below will run the script:
 python robo_advisor.py
 
 
-###########################################################################################################################################
+#################################
 2) Ensuring that you import the correct packages
 
 a) To ensure that the script runs correctly, please import the following:
@@ -37,7 +37,7 @@ import csv
 b) To briefly explain, os is needed for file pathing, requests and json is necessary to gather data from html and import json string into dictionary. datetime is necessary to acquire the current time.  csv is required to write data to a .csv file for later
 
 
-###########################################################################################################################################
+#################################
 3) Setting up an .env file and making sure its content will be loaded into script's environment
 
 a) Security is vital so we don't want to have your private API Key show up on your public github repository.  Hence, the the .gitignore component will prevent .env file to show up in the github repository.  Nonetheless, the .env file contents will have to be loaded into the script's environment via the following:
@@ -49,7 +49,7 @@ import requests
 load_dotenv() 
 
 
-###########################################################################################################################################
+#################################
 4) Gather an API Key from Alphavantage and store it in your .env file
 
 a) In order to pull dynamic, real time stock and financial data, you need to go to https://www.alphavantage.co/support/#api-key to generate your personal API Key.  
@@ -67,7 +67,7 @@ ALPHAVANTAGE_API_KEY="YOUR API KEY"
 c) By doing this, you can securely store your private key without worries of others seeing it
 
 
-###########################################################################################################################################
+#################################
 5) Set up your date and currency formatting to ensure less pain later
 
 a) Since we know that stocks are reliant on date and $xx.xx formatting, we should set formatting up to avoid confusion later
@@ -85,7 +85,7 @@ def usd_format(my_price):
     return "${0:,.2f}".format(my_price) 
 
 
-###########################################################################################################################################
+#################################
 6) Setting up Validation Step 1 and setting up the user input
 
 a) Inputting a stock ticker is driven through correct user inputs, but there needs to be a simple fail-safe loop that prevents script from proceeding without an approved input.  This can be completed via using a 'while' loop and setting up a series of conditional statements so:
@@ -125,7 +125,7 @@ response = requests.get(request_url)
 parsed_response = json.loads(response.text) #this converts string format into dictionary
 
 
-###########################################################################################################################################
+#################################
 7) Creating a Validation Step 2
 
 a) To prevent an awkward error from poor html connectivity via incorrect/invalid input, we also need to design a fail-safe to gracefully end the script.  This can be achieved via a simply try:, except: clause.  If there is a failure in the JSON Pull, then the script will exit() to prevent error
@@ -138,7 +138,7 @@ except:
     exit()
 
 
-###########################################################################################################################################
+#################################
 8) JSON Dictionary to Desired Output
 
 a) Now that JSON components have been imported from the Alphavantage site using API Key and user input, we have to pull relevant data from the dictionary that a user generates (Can be any stock ticker)
@@ -171,7 +171,7 @@ most_recent_low = parsed_response["Time Series (Daily)"][current_date]["3. low"]
 most_recent_total_volumes_traded = parsed_response["Time Series (Daily)"][current_date]["5. volume"]
 
 
-###########################################################################################################################################
+#################################
 9) Outputting Historical Stock Details onto a CSV File
 
 We can write a .csv file with trading/stock data when we operate the script by preparing the following:
@@ -209,7 +209,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
         })
 
 
-###########################################################################################################################################
+#################################
 10) Printing the Desired Results
 
 a) We're almost there!  We can now print out the variables that we have selected from the dictionary earlier on.  Ensure that you pass the float(variables) through the previously defined currency formatter UDF from section 5 (in this case {usd_format(float(variable))} ).  With this, you should be able to print out all the desired variables in correct format.
@@ -235,7 +235,7 @@ print(f"VOLUMES TRADED: {int(most_recent_total_volumes_traded)}") #switch this p
 print("-------------------------")
 
 
-###########################################################################################################################################
+#################################
 11) Printing Your Personal Recommendations
 
 a) You can incorporate whatever conditional recommendations you see fit, but I created some variables and my personal risk tolerance levels for % change + recommended moves:
@@ -266,7 +266,7 @@ print("HAPPY INVESTING!")
 print("-------------------------")
 
 
-###########################################################################################################################################
+#################################
 11) Final Statement
 
 Hope this was a fun project!  With this set up we should have:
