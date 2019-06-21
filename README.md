@@ -59,12 +59,12 @@ set an api_key variable by using the following line:
 
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY") 
 
-within the .env file from earlier, include a line script called:
+b) within the .env file from earlier, include a line script called:
 
 ALPHAVANTAGE_API_KEY="YOUR API KEY"
 
 
-b) By doing this, you can securely store your private key without worries of others seeing it
+c) By doing this, you can securely store your private key without worries of others seeing it
 
 
 ###########################################################################################################################################
