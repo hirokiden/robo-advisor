@@ -209,7 +209,7 @@ recommendation_sell = "Sell, so you won't lose your shirt...  This stock went do
 
 recommendation_buy = "Buy, this stock is potentially a great opportunity...  This stock went up by more than 3%..."
 
-recommendation_hold = "Hold, don't do anything...  This stock is operating with no abrupt changes in price..."
+recommendation_hold = "Hold, don't do anything...  This stock is operating with no abrupt changes in price... (Between + 3% ~ -8%)"
 
 
 
