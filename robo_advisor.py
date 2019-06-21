@@ -168,7 +168,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
 #  INFO OUTPUTS
 # 
 
-percentage_change_close_vs_open = ((float(most_recent_close)/float(most_recent_open) - 1) * 100)
+percentage_change_close_vs_open = (float(most_recent_close) - float(most_recent_open))/float(most_recent_open)
 
 print("-------------------------")
 print(f"SELECTED SYMBOL: {traded_stock_ticker}")
@@ -179,7 +179,7 @@ print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST OPEN: {usd_format(float(most_recent_open))}")
 print(f"LATEST CLOSE: {usd_format(float(most_recent_close))}") # a float() is necessary to convert a string to a float, otherwise error
-print("% CHANGE FROM OPEN TO CLOSE", "{0:.2%}".format(percentage_change_close_vs_open, "%"))
+print("% CHANGE FROM OPEN TO CLOSE", "{0:.3%}".format(percentage_change_close_vs_open))
 print(f"RECENT HIGH: {usd_format(float(most_recent_high))}")
 print(f"RECENT LOW: {usd_format(float(most_recent_low))}")
 print(f"VOLUMES TRADED: {int(most_recent_total_volumes_traded)}") #switch this portion to int() since no such thing as fraction of share...
