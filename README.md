@@ -71,7 +71,7 @@ ALPHAVANTAGE_API_KEY="YOUR API KEY"
 c) By doing this, you can securely store your private key without worries of others seeing it
 
 
-############################################## 
+
 #PROCEED BEYOND THIS POINT FOR CODE SPECIFICS#
 ##############################################
 
